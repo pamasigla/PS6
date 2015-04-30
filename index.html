@@ -45,11 +45,12 @@
       camera.position.set(0, 10, 0);
       scene.add(camera);
 
-      var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+      var geometry = new THREE.BoxGeometry( 5, 5, 5 );
       var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
       var cube = new THREE.Mesh( geometry, material );
+      cube.position.y = 200;
       scene.add( cube );
-      
+
       controls = new THREE.OrbitControls(camera, element);
       controls.rotateUp(Math.PI / 4);
       controls.target.set(
