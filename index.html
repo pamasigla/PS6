@@ -61,9 +61,9 @@
     // } );
 
     geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    material = new THREE.MeshBasicMaterial( { color: 0x407000 } );
+    material = new THREE.MeshBasicMaterial( { shading: THREE.SmoothShading } );
     mesh = new THREE.Mesh( geometry, material );
-    mesh.position.y = -250;
+    mesh.position.set(0,0,0);
     scene.add( mesh );
     
 
