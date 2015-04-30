@@ -19,12 +19,12 @@
     </style>
 </head>
 <body>
-<div id="example" style="position:absolute; "></div>
+<div id="example" style="position:absolute;" ></div>
 
 <script src="js/three.min.js"></script>
 <script src="js/StereoEffect.js"></script>
 <script src="js/DeviceOrientationControls.js"></script>
-<script src="js/threejs/OrbitControls.js"></script>
+<script src="js/OrbitControls.js"></script>
 
 <script>
     var camera, scene, renderer;
@@ -67,7 +67,7 @@
       var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
       scene.add(light);
       var texture = THREE.ImageUtils.loadTexture(
-        'textures/patterns/checker.png'
+        '../textures/patterns/checker.png'
       );
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.RepeatWrapping;
