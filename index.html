@@ -38,21 +38,11 @@
       element = renderer.domElement;
       container = document.getElementById('example');
       container.appendChild(element);
-
       effect = new THREE.StereoEffect(renderer);
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
       camera.position.set(0, 10, 0);
       scene.add(camera);
-
-      for(var i = 0; i < 5; i++){
-      var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-      var cube = new THREE.Mesh( geometry, material );
-      cube.position.set(i*2,5,0);
-      scene.add( cube );
-      }
-
       controls = new THREE.OrbitControls(camera, element);
       controls.rotateUp(Math.PI / 4);
       controls.target.set(
@@ -63,7 +53,6 @@
       controls.noZoom = true;
       controls.noPan = true;
       controls.autoRotate = false;
-
       function setOrientationControls(e) {
         if (!e.alpha) {
           return;
