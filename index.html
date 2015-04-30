@@ -44,20 +44,20 @@
       camera.position.set(0, 10, 0);
       scene.add(camera);
 
-      // var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-      // var cube = new THREE.Mesh( geometry, material );
-      // cube.position.set(0, 5, 0);
-      // scene.add( cube );
+      var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+      var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+      var cube = new THREE.Mesh( geometry, material );
+      cube.position.set(0, 5, 0);
+      scene.add( cube );
 
 
-      // var cube2 = new THREE.Mesh( geometry, material );
-      // cube.position.set(5, 2, 0);
-      // scene.add( cube2 );
+      var cube2 = new THREE.Mesh( geometry, material );
+      cube.position.set(5, 2, 0);
+      scene.add( cube2 );
 
-      // var cube3 = new THREE.Mesh( geometry, material );
-      // cube.position.set(10, 7, 0);
-      // scene.add( cube3 );
+      var cube3 = new THREE.Mesh( geometry, material );
+      cube.position.set(10, 7, 0);
+      scene.add( cube3 );
 
       controls = new THREE.OrbitControls(camera, element);
       controls.rotateUp(Math.PI / 4);
