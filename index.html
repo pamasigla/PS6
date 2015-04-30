@@ -41,8 +41,7 @@
 
       effect = new THREE.StereoEffect(renderer);
       scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
-      camera.position.set(0, 0, 0);
+      camera = new THREE.PerspectiveCamera( 45, width / height, 1, 1000);
       scene.add(camera);
 
       var geometry = new THREE.BoxGeometry( 1, 1, 1 );
