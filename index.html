@@ -50,16 +50,16 @@
       cube.position.set(0,20,5);
       scene.add( cube );
 
-      // controls = new THREE.OrbitControls(camera, element);
-      // controls.rotateUp(Math.PI / 4);
-      // controls.target.set(
-      //   camera.position.x + 0.1,
-      //   camera.position.y,
-      //   camera.position.z
-      // );
-      // controls.noZoom = true;
-      // controls.noPan = true;
-      // controls.autoRotate = false;
+      controls = new THREE.OrbitControls(camera, element);
+      controls.rotateUp(Math.PI / 4);
+      controls.target.set(
+        camera.position.x + 0.1,
+        camera.position.y,
+        camera.position.z
+      );
+      controls.noZoom = true;
+      controls.noPan = true;
+      controls.autoRotate = false;
 
       function setOrientationControls(e) {
         if (!e.alpha) {
