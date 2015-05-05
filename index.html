@@ -23,9 +23,9 @@
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
 </div>
 
-<audio id="audio">
+<!-- <audio id="audio">
     <source src="Canyonero.mp3" type="audio/mp3" />
-</audio>
+</audio> -->
 
 <script>
 /*
@@ -57,37 +57,38 @@ animate();
 // FUNCTIONS    
 function init() 
 {
-  var audioSprite = document.getElementById('audio');
+  // var audioSprite = document.getElementById('audio');
 
-  // sprite data
-  var spriteData = {
-      simpsons: {
-          start: 4,
-          length: 30
-      }
-  };
+  // // sprite data
+  // var spriteData = {
+  //     simpsons: {
+  //         start: 0,
+  //         length: 30
+  //     }
+  // };
 
-  // current sprite being played
-  var currentSprite = {};
+  // // current sprite being played
+  // var currentSprite = {};
 
-  // time update handler to ensure we stop when a sprite is complete
-  var onTimeUpdate = function() {
-      if (this.currentTime >= currentSprite.start + currentSprite.length) {
-          this.pause();
-      }
-  };
-  audioSprite.addEventListener('timeupdate', onTimeUpdate, false);
+  // // time update handler to ensure we stop when a sprite is complete
+  // var onTimeUpdate = function() {
+  //     if (this.currentTime >= currentSprite.start + currentSprite.length) {
+  //         this.pause();
+  //     }
+  // };
 
-  // in mobile Safari, the first time this is called will load the audio. Ideally, we'd load the audio file completely before doing this.
-  var playSprite = function(id) {
-      if (spriteData[id] && spriteData[id].length) {
-          currentSprite = spriteData[id];
-          audioSprite.currentTime = currentSprite.start;
-          audioSprite.play();
-      }
-  };
+  // audioSprite.addEventListener('timeupdate', onTimeUpdate, false);
 
-  playSprite('simpsons');
+  // // in mobile Safari, the first time this is called will load the audio. Ideally, we'd load the audio file completely before doing this.
+  // var playSprite = function(id) {
+  //     if (spriteData[id] && spriteData[id].length) {
+  //         currentSprite = spriteData[id];
+  //         audioSprite.currentTime = currentSprite.start;
+  //         audioSprite.play();
+  //     }
+  // };
+
+  // playSprite('simpsons');
 
   // SCENE
   var geometry, material, mesh;
@@ -102,8 +103,10 @@ function init()
   // RENDERER
   if ( Detector.webgl )
     renderer = new THREE.WebGLRenderer( {antialias:true} );
-  else
+  else{
     renderer = new THREE.CanvasRenderer(); 
+    Detector.addGetWebGLMessage(webglEl);
+  }
   renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
   container = document.getElementById( 'ThreeJS' );
   container.appendChild( renderer.domElement );
@@ -112,6 +115,11 @@ function init()
   THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
   // CONTROLS
   
+  // Earth params
+  var radius   = 0.5,
+    segments = 32,
+    rotation = 6;  
+
   // LIGHT
   var light = new THREE.PointLight(0xffffff);
   light.position.set(0,250,0);
@@ -178,7 +186,12 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
   var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
   scene.add( skyBox );
-  
+
+  var planets = [];
+  var earth = createEarth(radius, segments, 10, 100);
+   planets.push(earth);
+
+   scene.add(earth);
 }
 
 function endGame(){
@@ -261,6 +274,37 @@ function createMars(radius, segments, xvar, zvar) {
 
     return temp;
   }
+
+function createMercury(radius, segments, xvar, zvar){
+  var temp = new THREE.Mesh(
+    new THREE.SphereGeometry(radius, segments, segments),
+      new THREE.MeshPhongMaterial({
+    map : THREE.ImageUtils.loadTexture('images/mercurymap.jpg'),
+    bumpMap : THREE.ImageUtils.loadTexture('images/mercurybump.jpg'),
+    bumpScale: 0.005,
+  })
+      );
+  
+    temp.position.x = xvar;
+    temp.position.z = zvar;
+  return temp ;
+}
+
+function createJupiter(radius, segments, xvar, zvar){
+  var temp = new THREE.Mesh(
+    new THREE.SphereGeometry(radius, segments, segments),
+      new THREE.MeshPhongMaterial({
+    map : THREE.ImageUtils.loadTexture('images/jupitermap.jpg'),
+    bumpMap : THREE.ImageUtils.loadTexture('images/jupitermap.jpg'),
+    bumpScale: 0.02,
+  })
+      );
+  
+    temp.position.x = xvar;
+    temp.position.z = zvar;
+  return temp 
+}
+
 </script>
 
 </body>
