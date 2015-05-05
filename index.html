@@ -35,7 +35,7 @@
 */
 // MAIN
 // standard global variables
-var container, scene, camera, renderer, controls, stats, earth;
+var container, scene, camera, renderer, controls, stats, earth, planets = [];
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 // custom global variables
@@ -114,11 +114,7 @@ function init()
   THREEx.WindowResize(renderer, camera);
   THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
   // CONTROLS
-  
-  // Earth params
-  var radius   = 3,
-    segments = 32,
-    rotation = 6;  
+
 
   // LIGHT
   var light = new THREE.PointLight(0xffffff);
@@ -187,11 +183,11 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
   scene.add( skyBox );
 
-  var planets = [];
   earth = createEarth(radius, segments, 10, 0);
-   planets.push(earth);
+   
 
    scene.add(earth);
+   planets.push(earth);
 }
 
 function endGame(){
@@ -201,6 +197,9 @@ function endGame(){
 
 function animate() 
 {
+    for(i = 0; i < planets.length;i++){
+      planets[i].rotation.y += .05;
+    }
     requestAnimationFrame( animate );
     controls.update( clock.getDelta() );
     if ( controls.orientationQuaternion !== undefined ) {
@@ -224,7 +223,7 @@ function update()
 function render() 
 {
   renderer.render( scene, camera );
-  earth.rotation.y += .005;
+
 }
 
 function createEarth(radius, segments, xvar, zvar) {
