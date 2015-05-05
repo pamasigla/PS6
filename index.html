@@ -14,9 +14,6 @@
 <script src="js/THREEx.KeyboardState.js"></script>
 <script src="js/THREEx.FullScreen.js"></script>
 <script src="js/THREEx.WindowResize.js"></script>
-<script src="js/StereoEffect.js"></script>
-<script src="js/DeviceOrientationControls.js"></script>
-<script src="js/DetectScreenSize.js"></script>
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
 <script>
@@ -27,31 +24,30 @@
 */
 // MAIN
 // standard global variables
-var container, scene, camera, renderer, controls, stats, renderer, info;
+var container, scene, camera, renderer, controls, stats;
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 // custom global variables
 var cube;
-  var effect;
-  var hasOrientation = function(evt) {
-    if (!evt.alpha) {
-      return;
-    }
-    window.removeEventListener('deviceorientation', hasOrientation, false);
-    controls = new THREE.DeviceOrientationControls( camera );
-    controls.connect();
-    controls.movementSpeed = 100;
-    controls.rollSpeed = 0.05;
-  };
+var hasOrientation = function(evt) {
+  if (!evt.alpha) {
+    return;
+  }
+  window.removeEventListener('deviceorientation', hasOrientation, false);
+  controls = new THREE.DeviceOrientationControls( camera );
+  controls.connect();
+  controls.movementSpeed = 100;
+  controls.rollSpeed = 0.05;
+};
+
 
 init();
 animate();
 // FUNCTIONS    
 function init() 
 {
-  var container = document.body.appendChild( document.createElement( 'div' ) );
-  container.appendChild( renderer.domElement );
   // SCENE
+  var geometry, material, mesh;
   scene = new THREE.Scene();
   // CAMERA
   var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
@@ -62,16 +58,17 @@ function init()
   camera.lookAt(scene.position);  
   // RENDERER
   if ( Detector.webgl )
-    renderer = new THREE.WebGLRenderer( {alpha: 1, antialias: true, clearColor: 0xffffff } );
+    renderer = new THREE.WebGLRenderer( {antialias:true} );
   else
     renderer = new THREE.CanvasRenderer(); 
   renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-
+  container = document.getElementById( 'ThreeJS' );
+  container.appendChild( renderer.domElement );
   // EVENTS
   THREEx.WindowResize(renderer, camera);
   THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
   // CONTROLS
-      controls = new THREE.FirstPersonControls( camera );
+  controls = new THREE.OrbitControls( camera, renderer.domElement );
   // STATS
   stats = new Stats();
   stats.domElement.style.position = 'absolute';
@@ -92,7 +89,32 @@ function init()
   floor.position.y = 0;
   floor.rotation.x = Math.PI / 2;
   scene.add(floor);
+
+  controls = new THREE.FirstPersonControls( camera );
+//    controls.movementSpeed = 10;
+//    controls.lookSpeed = 0.05;
+    effect = new THREE.StereoEffect( renderer );
+    effect.separation = 0.2;
+    effect.targetDistance = 50;
+    effect.setSize( window.innerWidth, window.innerHeight );
   
+window.addEventListener('deviceorientation', hasOrientation, false);
+    window.addEventListener( 'touchend', function () {
+      if ( isFullscreen === false ) {
+        document.body.webkitRequestFullscreen();
+        isFullscreen = true;
+      } else {
+        document.webkitExitFullscreen();
+        isFullscreen = false;
+      }
+    } );
+    window.addEventListener( 'resize', function () {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      effect.setSize( window.innerWidth, window.innerHeight );
+    }, false );
+    controls.autoForward = false;
+
   ////////////
   // CUSTOM //
   ////////////
@@ -120,9 +142,6 @@ function init()
 function animate() 
 {
     requestAnimationFrame( animate );
-
-
-requestAnimationFrame( animate );
     controls.update( clock.getDelta() );
     if ( controls.orientationQuaternion !== undefined ) {
       if ( controls.gamma < 1 && controls.gamma > 0 ) { controls.autoForward = true; }
@@ -131,7 +150,6 @@ requestAnimationFrame( animate );
     } else {
       renderer.render( scene, camera );
     }
-
 }
 function update()
 {
