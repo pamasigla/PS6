@@ -58,6 +58,18 @@ animate();
 // FUNCTIONS    
 function init() 
 {
+  var count = 0;
+  document.body.style.cssText = 'font: 600 12pt monospace; margin: 0; overflow: hidden; ' ;
+
+    var info = document.body.appendChild( document.createElement( 'div' ) );
+
+    info.style.cssText = 'left: 10px; position: absolute; ';
+
+    info.innerHTML = '<h3>' + document.title + '</h3>' +
+      '<div id=msg>counter: </div>';
+
+    info.innerHTML = innerHTML.innerHTML + count;
+
   // var audioSprite = document.getElementById('audio');
 
   // // sprite data
@@ -244,6 +256,9 @@ function animate()
       if(Math.sqrt(xDiff*xDiff + zDiff*zDiff) < 2+ radius ){
         console.log("intersection")
         scene.remove(planets[i]);
+
+        counter.innerHTML = "counter: " + count;
+
         planets.filter(function(p){
           if(p!=planets[i])
               return p;
