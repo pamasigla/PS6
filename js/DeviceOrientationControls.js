@@ -135,6 +135,7 @@ THREE.DeviceOrientationControls = function(object) {
           .applyQuaternion(this.object.quaternion, 'ZXY')
           .setLength(this.movementSpeed / 50); // TODO: why 50 :S
 
+        tempVector3.y = 10;
         this.object.position.add(tempVector3);
 
       }
