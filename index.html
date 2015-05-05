@@ -58,17 +58,17 @@ animate();
 // FUNCTIONS    
 function init() 
 {
-  var count = 0;
-  document.body.style.cssText = 'font: 600 12pt monospace; margin: 0; overflow: hidden; ' ;
+  // var count = 0;
+  // document.body.style.cssText = 'font: 600 12pt monospace; margin: 0; overflow: hidden; ' ;
 
-    var info = document.body.appendChild( document.createElement( 'div' ) );
+  //   var info = document.body.appendChild( document.createElement( 'div' ) );
 
-    info.style.cssText = 'left: 10px; position: absolute; ';
+  //   info.style.cssText = 'left: 10px; position: absolute; ';
 
-    info.innerHTML = '<h3>' + document.title + '</h3>' +
-      '<div id=msg>counter: </div>';
+  //   info.innerHTML = '<h3>' + document.title + '</h3>' +
+  //     '<div id=msg>counter: </div>';
 
-    info.innerHTML = innerHTML.innerHTML + count;
+  //   info.innerHTML = innerHTML.innerHTML + count;
 
   // var audioSprite = document.getElementById('audio');
 
@@ -212,25 +212,25 @@ window.addEventListener('deviceorientation', hasOrientation, false);
     planets.push(earth);
     scene.add(earth);
 
-    var earth2 = createEarth(radius, segments, -125,-70);
+    var mercury = createMercury(radius, segments, -125,-70);
+    mercury.position.y = startY + 2;
+    planets.push(mercury);
+    scene.add(mercury);
+
+    var jupiter = createJupiter(radius, segments, 40, -15);
+    jupiter.position.y = startY + 2;
+    planets.push(jupiter);
+    scene.add(jupiter);
+
+    var mars = createMars(radius, segments, 92, 12);
+    mars.position.y = startY + 2;
+    planets.push(mars);
+    scene.add(mars);
+
+    var earth2 = createEarth(radius, segments, 500, 100);
     earth2.position.y = startY + 2;
     planets.push(earth2);
     scene.add(earth2);
-
-    var earth3 = createEarth(radius, segments, 40, -15);
-    earth3.position.y = startY + 2;
-    planets.push(earth3);
-    scene.add(earth3);
-
-    var earth4 = createEarth(radius, segments, 92, 12);
-    earth4.position.y = startY + 2;
-    planets.push(earth4);
-    scene.add(earth4);
-
-    var earth5 = createEarth(radius, segments, 500, 100);
-    earth5.position.y = startY + 2;
-    planets.push(earth5);
-    scene.add(earth5);
 }
 
 function endGame(){
@@ -257,7 +257,7 @@ function animate()
         console.log("intersection")
         scene.remove(planets[i]);
 
-        counter.innerHTML = "counter: " + count;
+        //counter.innerHTML = "counter: " + count;
 
         planets.filter(function(p){
           if(p!=planets[i])
