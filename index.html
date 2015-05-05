@@ -1,76 +1,15 @@
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Cardboard Template R2</title>
-</head>
-<body>
-<script src="js/three.min.js"></script>
-<script src="js/Detector.js"></script>
-<script src="js/RequestAnimationFrame.js"></script>
-<script src="js/stats.js"></script>
-<script>
-var startTime = Date.now();
-var container;
-var camera, scene, renderer, stats;
-var skyboxMesh;
-
-init();
-
-animate();
-
-function init() {
-
-if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
-camera = new THREE.Camera( 70, window.innerWidth / window.innerHeight, 1, 100000 );
-scene = new THREE.Scene();
-
-var urlPrefix = "images/";
-  var urls = [ urlPrefix + "posx.jpg", urlPrefix + "negx.jpg",
-      urlPrefix + "posy.jpg", urlPrefix + "negy.jpg",
-      urlPrefix + "posz.jpg", urlPrefix + "negz.jpg" ];
-  var textureCube = THREE.ImageUtils.loadTextureCube( urls );
-  
-  var shader  = THREE.ShaderUtils.lib["cube"];
-  shader.uniforms["tCube"].texture = textureCube;
-  var material = new THREE.MeshShaderMaterial({
-    fragmentShader  : shader.fragmentShader,
-    vertexShader  : shader.vertexShader,
-    uniforms  : shader.uniforms
-  });
-
-  skyboxMesh  = new THREE.Mesh( new THREE.CubeGeometry( 100000, 100000, 100000, 1, 1, 1, null, true ), material );
-
-  scene.addObject( skyboxMesh );
-
-  container = document.createElement( 'div' );
-  document.body.appendChild( container );
-
-renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  container.appendChild( renderer.domElement );
-  
-
-  stats = new Stats();
-  stats.domElement.style.position = 'absolute';
-  stats.domElement.style.top = '0px';
-  container.appendChild( stats.domElement );
-}
-
-function animate() {
-
-render();
-requestAnimationFrame( animate );
-stats.update();
-}
-
-function render() {
-  var timer = - new Date().getTime() * 0.0002; 
-  camera.position.x = 1000 * Math.cos( timer );
-  camera.position.z = 1000 * Math.sin( timer );
- 
-  renderer.render( scene, camera );
-}
-</script>
-</body>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>LearningThreejs - Lets do a sky</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <!-- include javascript files -->
+    <script type="text/javascript" src="js/three.min.js"></script>
+    <script type="text/javascript" src="js/RequestAnimationFrame.js"></script>
+    <script type="text/javascript" src="js/Detector.js"></script>
+    <script type="text/javascript" src="js/Stats.js"></script>
+    <script type="text/javascript" src="js/lets_make_a_sky.js"></script>
+  </body>
 </html>
