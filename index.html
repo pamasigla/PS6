@@ -241,7 +241,7 @@ function animate()
       var xDiff = planetX - x;
       var zDiff = planetZ - z;
 
-      if(Math.sqrt(xDiff*xDiff + zDiff*zDiff) + 4 > radius ){
+      if(Math.sqrt(xDiff*xDiff + zDiff*zDiff) < 2+ radius ){
         console.log("intersection")
       }
 
