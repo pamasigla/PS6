@@ -36,7 +36,7 @@
 // MAIN
 // standard global variables
 var container, scene, camera, renderer, controls, stats;
-var planets = [], radius = 3, segments =32, startX = 0, startY = 5, startZ = 15, minDist = 5, maxDist = 30;
+var planets = [], radius = 3, segments =32, startX = 0, startY = 5, startZ = 15;
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 // custom global variables
@@ -184,16 +184,41 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
   scene.add( skyBox );
 
-  for(var i=0; i <=5; i++){
-    var rand = (Math.random() * 2) - 1;
-    var x = startX + rand * (maxDist - minDist) + minDist;
-    var z = startZ + rand * (maxDist - minDist) + minDist;
-    var earth = createEarth(radius, segments, x, z);
-    earth.position.y = startY + 1;
+  // for(var i=0; i <=5; i++){
+  //   var rand = (Math.random() * 2) - 1;
+  //   var x = startX + rand * (maxDist - minDist) + minDist;
+  //   var z = startZ + rand * (maxDist - minDist) + minDist;
+  //   var earth = createEarth(radius, segments, x, z);
+  //   earth.position.y = startY + 1;
+  //   planets.push(earth);
+  //   scene.add(earth);
+  // }
+
+
+    var earth = createEarth(radius, segments, -250, -25);
+    earth.position.y = startY + 2;
     planets.push(earth);
     scene.add(earth);
-  }
 
+    var earth2 = createEarth(radius, segments, -125,-70);
+    earth2.position.y = startY + 2;
+    planets.push(earth2);
+    scene.add(earth2);
+
+    var earth3 = createEarth(radius, segments, 40, -15);
+    earth3.position.y = startY + 2;
+    planets.push(earth3);
+    scene.add(earth3);
+
+    var earth4 = createEarth(radius, segments, 92, 12);
+    earth4.position.y = startY + 2;
+    planets.push(earth4);
+    scene.add(earth4);
+
+    var earth5 = createEarth(radius, segments, 500, 100);
+    earth5.position.y = startY + 2;
+    planets.push(earth5);
+    scene.add(earth5);
 }
 
 function endGame(){
