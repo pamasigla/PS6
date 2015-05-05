@@ -243,6 +243,12 @@ function animate()
 
       if(Math.sqrt(xDiff*xDiff + zDiff*zDiff) < 2+ radius ){
         console.log("intersection")
+        scene.remove(planets[i]);
+        planets.filter(function(p){
+          if(p!=planets[i])
+              return p;
+        })
+
       }
 
     }
