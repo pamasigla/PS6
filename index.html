@@ -59,8 +59,6 @@ function init()
 {
   var audioSprite = document.getElementById('audio');
 
-  playSprite('simpsons');
-
   // sprite data
   var spriteData = {
       simpsons: {
@@ -88,6 +86,8 @@ function init()
           audioSprite.play();
       }
   };
+
+  playSprite('simpsons');
 
   // SCENE
   var geometry, material, mesh;
