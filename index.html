@@ -230,7 +230,21 @@ function animate()
 {
     for(i = 0; i < planets.length;i++){
       planets[i].rotation.y += .05;
+      var planetX = planets[i].position.x
+      var planetZ = planets[i].position.z
+      
+      var x = camera.position.x;
+      var z = camera.position.z;
+
+      var xDiff = planetX - x;
+      var zDiff = planetZ - z;
+
+      if(sqrt(xDiff*xDiff + zDiff*zDiff) > radius){
+        alert("intersection")
+      }
+
     }
+
     requestAnimationFrame( animate );
     controls.update( clock.getDelta() );
     if ( controls.orientationQuaternion !== undefined ) {
