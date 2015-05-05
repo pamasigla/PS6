@@ -19,7 +19,9 @@
 <script src="js/DetectScreenSize.js"></script>
 <script src="http://mrdoob.github.io/three.js/examples/js/controls/FirstPersonControls.js"></script>
 
+<div id="parent">
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
+</div>
 <script>
 /*
   Three.js "tutorials by example"
@@ -52,6 +54,7 @@ function init()
 {
   // AUDIO
   var audio = new Audio('Canyonero.mp3');
+  //var audio = new Audio('simpsons.mp3');
   audio.play();
 
   // SCENE
@@ -105,6 +108,8 @@ function init()
     effect.separation = 0.2;
     effect.targetDistance = 50;
     effect.setSize( window.innerWidth, window.innerHeight );
+
+window.setTimeout("endGame", 45000);
   
 window.addEventListener('deviceorientation', hasOrientation, false);
     window.addEventListener( 'touchend', function () {
@@ -148,6 +153,12 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   scene.add( skyBox );
   
 }
+
+function endGame(){
+  var parent = document.getElementById( 'parent' );
+  parent.css("background-color", "black");
+}
+
 function animate() 
 {
     requestAnimationFrame( animate );
@@ -174,6 +185,55 @@ function render()
 {
   renderer.render( scene, camera );
 }
+
+function createEarth(radius, segments, xvar, zvar) {
+    var temp = new THREE.Mesh(
+      new THREE.SphereGeometry(radius, segments, segments),
+      new THREE.MeshPhongMaterial({
+        map:         THREE.ImageUtils.loadTexture('images/2_no_clouds_4k.jpg'),
+        bumpMap:     THREE.ImageUtils.loadTexture('images/elev_bump_4k.jpg'),
+        bumpScale:   0.005,
+        specularMap: THREE.ImageUtils.loadTexture('images/water_4k.png'),
+        specular:    new THREE.Color('grey')                
+      })
+    );
+    temp.position.x = xvar;
+    temp.position.z = zvar;
+
+    return temp;
+    
+  }
+
+function createMars(radius, segments, xvar, zvar) {
+    var temp = new THREE.Mesh(
+      new THREE.SphereGeometry(radius, segments, segments),
+      new THREE.MeshPhongMaterial({
+        map : THREE.ImageUtils.loadTexture('images/marsmap1k.jpg'),
+      bumpMap : THREE.ImageUtils.loadTexture('images/marsbump1k.jpg'),
+      bumpScale: 0.05           
+      })
+    );
+    temp.position.x = xvar;
+    temp.position.z = zvar;
+
+    return temp;
+
+  }
+
+  function createClouds(radius, segments, xvar, zvar) {
+    var temp = new THREE.Mesh(
+      new THREE.SphereGeometry(radius + 0.003, segments, segments),     
+      new THREE.MeshPhongMaterial({
+        map:         THREE.ImageUtils.loadTexture('images/fair_clouds_4k.png'),
+        transparent: true
+      })
+    );  
+
+    temp.position.x = xvar;
+    temp.position.z = zvar;
+
+    return temp;
+  }
 </script>
 
 </body>
