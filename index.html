@@ -5,49 +5,12 @@
     <meta charset="utf-8">
   </head>
   <body>
+    <div></div>
     <!-- include javascript files -->
     <script type="text/javascript" src="js/three.min.js"></script>
     <script type="text/javascript" src="js/RequestAnimationFrame.js"></script>
     <script type="text/javascript" src="js/Detector.js"></script>
     <script type="text/javascript" src="js/stats.js"></script>
-    <script>
-    var geometry = new THREE.SphereGeometry(3000, 60, 40);
-    var uniforms = {
-      texture: { type: 't', value: loadTexture('images/sky.jpg') }
-    };
-
-    var material = new THREE.ShaderMaterial( {
-      uniforms:       uniforms,
-      vertexShader:   document.getElementById('sky-vertex').textContent,
-      fragmentShader: document.getElementById('sky-fragment').textContent
-    });
-
-    skyBox = new THREE.Mesh(geometry, material);
-    skyBox.scale.set(-1, 1, 1);
-    skyBox.eulerOrder = 'XZY';
-    skyBox.renderDepth = 1000.0;
-    scene.add(skyBox);
-    </script>
-
-    <script type="application/x-glsl" id="sky-vertex">
-    varying vec2 vUV;
-
-    void main() {
-      vUV = uv;
-      vec4 pos = vec4(position, 1.0);
-      gl_Position = projectionMatrix * modelViewMatrix * pos;
-    }
-    </script>
-
-    <script type="application/x-glsl" id="sky-fragment">
-    uniform sampler2D texture;
-    varying vec2 vUV;
-
-    void main() {
-      vec4 sample = texture2D(texture, vUV);
-      gl_FragColor = vec4(sample.xyz, sample.w);
-    }
-    </script>
-
+    <script type="text/javascript" src="lets_make_a_sky.js"></script>
   </body>
 </html>
