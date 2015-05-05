@@ -22,6 +22,11 @@
 <div id="parent">
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
 </div>
+
+<audio id="audio">
+    <source src="Canyonero.mp3" type="audio/mp3" />
+</audio>
+
 <script>
 /*
   Three.js "tutorials by example"
@@ -52,10 +57,37 @@ animate();
 // FUNCTIONS    
 function init() 
 {
-  // AUDIO
-  var audio = new Audio('Canyonero.mp3');
-  //var audio = new Audio('simpsons.mp3');
-  audio.play();
+  var audioSprite = document.getElementById('audio');
+
+  playSprite('simpsons');
+
+  // sprite data
+  var spriteData = {
+      simpsons: {
+          start: 0,
+          length: 1.1
+      }
+  };
+
+  // current sprite being played
+  var currentSprite = {};
+
+  // time update handler to ensure we stop when a sprite is complete
+  var onTimeUpdate = function() {
+      if (this.currentTime >= currentSprite.start + currentSprite.length) {
+          this.pause();
+      }
+  };
+  audioSprite.addEventListener('timeupdate', onTimeUpdate, false);
+
+  // in mobile Safari, the first time this is called will load the audio. Ideally, we'd load the audio file completely before doing this.
+  var playSprite = function(id) {
+      if (spriteData[id] && spriteData[id].length) {
+          currentSprite = spriteData[id];
+          audioSprite.currentTime = currentSprite.start;
+          audioSprite.play();
+      }
+  };
 
   // SCENE
   var geometry, material, mesh;
