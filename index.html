@@ -35,7 +35,8 @@
 */
 // MAIN
 // standard global variables
-var container, scene, camera, renderer, controls, stats, earth, planets = [];
+var container, scene, camera, renderer, controls, stats;
+var planets = [], radius = 3, segments =32, startX = 0, startY = 5, startZ = 15, minDist = 5, maxDist = 30;
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 // custom global variables
@@ -98,7 +99,7 @@ function init()
   var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
   camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
   scene.add(camera);
-  camera.position.set(0,5,15);
+  camera.position.set(startX,startY,startZ);
   camera.lookAt(scene.position);  
   // RENDERER
   if ( Detector.webgl )
@@ -182,13 +183,17 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
   var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
   scene.add( skyBox );
-  radius = 3;
-  segments =32;
-  earth = createEarth(radius, segments, 10, 0);
-   
 
-   scene.add(earth);
-   planets.push(earth);
+  for(var i=0; i <=5; i++){
+    var rand = (Math.random() * 2) - 1;
+    var x = startX + rand * (maxDist - minDist) + minDist;
+    var z = startZ + rand * (maxDist - minDist) + minDist;
+    var earth = createEarth(radius, segments, x, z);
+    earth.position.y = startY + 1;
+    planets.push(earth);
+    scene.add(earth);
+  }
+
 }
 
 function endGame(){
