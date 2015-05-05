@@ -199,6 +199,7 @@ function animate()
 {
     for(i = 0; i < planets.length;i++){
       planets[i].rotation.y += .05;
+      alert("applied roation")
     }
     requestAnimationFrame( animate );
     controls.update( clock.getDelta() );
