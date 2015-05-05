@@ -199,7 +199,7 @@ function endGame(){
 function animate() 
 {
     for(i = 0; i < planets.length;i++){
-      planets[i].rotation.y += planets[i].roationSpeed;
+      planets[i].rotation.y += .005
     }
     requestAnimationFrame( animate );
     controls.update( clock.getDelta() );
@@ -240,7 +240,7 @@ function createEarth(radius, segments, xvar, zvar) {
     );
     temp.position.x = xvar;
     temp.position.z = zvar;
-    temp['rotationSpeed'] = .0005;
+   // temp['rotationSpeed'] = .0005;
 
     return temp;
     
