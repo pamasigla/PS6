@@ -116,7 +116,7 @@ function init()
   // CONTROLS
   
   // Earth params
-  var radius   = 10,
+  var radius   = 7,
     segments = 32,
     rotation = 6;  
 
@@ -188,7 +188,7 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   scene.add( skyBox );
 
   var planets = [];
-  var earth = createEarth(radius, segments, 10, 100);
+  var earth = createEarth(radius, segments, 10, 0);
    planets.push(earth);
 
    scene.add(earth);
