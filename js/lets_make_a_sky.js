@@ -29,7 +29,7 @@ function init() {
 	// ## Begining of the Skybox Code
 	
 	// load the cube textures
-	var urlPrefix	= "images/Bridge2/";
+	var urlPrefix	= "../images/";
 	var urls = [ urlPrefix + "posx.jpg", urlPrefix + "negx.jpg",
 			urlPrefix + "posy.jpg", urlPrefix + "negy.jpg",
 			urlPrefix + "posz.jpg", urlPrefix + "negz.jpg" ];
