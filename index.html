@@ -116,7 +116,7 @@ function init()
   // CONTROLS
   
   // Earth params
-  var radius   = 7,
+  var radius   = 3,
     segments = 32,
     rotation = 6;  
 
@@ -224,6 +224,7 @@ function update()
 function render() 
 {
   renderer.render( scene, camera );
+  earth.rotation.y += .005;
 }
 
 function createEarth(radius, segments, xvar, zvar) {
