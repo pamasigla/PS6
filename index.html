@@ -35,7 +35,7 @@
 */
 // MAIN
 // standard global variables
-var container, scene, camera, renderer, controls, stats;
+var container, scene, camera, renderer, controls, stats, earth;
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 // custom global variables
@@ -188,7 +188,7 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   scene.add( skyBox );
 
   var planets = [];
-  var earth = createEarth(radius, segments, 10, 0);
+  earth = createEarth(radius, segments, 10, 0);
    planets.push(earth);
 
    scene.add(earth);
