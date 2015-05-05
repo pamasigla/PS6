@@ -14,6 +14,9 @@
 <script src="js/THREEx.KeyboardState.js"></script>
 <script src="js/THREEx.FullScreen.js"></script>
 <script src="js/THREEx.WindowResize.js"></script>
+<script src="js/StereoEffect.js"></script>
+<script src="js/DeviceOrientationControls.js"></script>
+<script src="js/DetectScreenSize.js"></script>
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
 <script>
@@ -68,7 +71,6 @@ function init()
   THREEx.WindowResize(renderer, camera);
   THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
   // CONTROLS
-  controls = new THREE.OrbitControls( camera, renderer.domElement );
   // STATS
   stats = new Stats();
   stats.domElement.style.position = 'absolute';
