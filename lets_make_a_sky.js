@@ -22,12 +22,15 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 camera = new THREE.Camera( 70, window.innerWidth / window.innerHeight, 1, 100000 );
 scene = new THREE.Scene();
 
-var urlPrefix	= "images/";
-	var urls = [ urlPrefix + "posx.jpg", urlPrefix + "negx.jpg",
-			urlPrefix + "posy.jpg", urlPrefix + "negy.jpg",
-			urlPrefix + "posz.jpg", urlPrefix + "negz.jpg" ];
-
-	console.log(urlPrefix + "posx.jpg");		
+	var urls = [
+	  'images/posx.jpg',
+	  'images/posy.jpg',
+	  'images/posz.jpg',
+	  'images/negx.jpg',
+	  'images/negy.jpg',
+	  'images/negz.jpg'
+	];
+		
 	var textureCube	= THREE.ImageUtils.loadTextureCube( urls );
 	
 	var shader = THREE.ShaderLib['cube'];
@@ -36,6 +39,9 @@ var urlPrefix	= "images/";
 		fragmentShader	: shader.fragmentShader,
 		vertexShader	: shader.vertexShader,
 		uniforms	: shader.uniforms
+		  depthWrite: false,
+		  side: THREE.BackSide
+
 	});
 
 	skyboxMesh	= new THREE.Mesh( new THREE.BoxGeometry( 100000, 100000, 100000, 1, 1, 1, null, true ), material );
