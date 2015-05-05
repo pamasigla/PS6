@@ -38,8 +38,7 @@ scene = new THREE.Scene();
 	var material = new THREE.ShaderMaterial({
 		fragmentShader	: shader.fragmentShader,
 		vertexShader	: shader.vertexShader,
-		uniforms	: shader.uniforms
-		  depthWrite: false,
+		uniforms	: shader.uniforms,
 		  side: THREE.BackSide
 
 	});
