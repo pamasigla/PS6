@@ -50,6 +50,10 @@ animate();
 // FUNCTIONS    
 function init() 
 {
+  // AUDIO
+  var audio = new Audio('Canyonero.mp3');
+  audio.play();
+
   // SCENE
   var geometry, material, mesh;
   scene = new THREE.Scene();
@@ -123,8 +127,8 @@ window.addEventListener('deviceorientation', hasOrientation, false);
   ////////////
   
   // axes
-  var axes = new THREE.AxisHelper(100);
-  scene.add( axes );
+  // var axes = new THREE.AxisHelper(100);
+  // scene.add( axes );
   
   var imagePrefix = "images/simpsons-";
   var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
