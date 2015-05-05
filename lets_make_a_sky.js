@@ -26,6 +26,8 @@ var urlPrefix	= "images/";
 	var urls = [ urlPrefix + "posx.jpg", urlPrefix + "negx.jpg",
 			urlPrefix + "posy.jpg", urlPrefix + "negy.jpg",
 			urlPrefix + "posz.jpg", urlPrefix + "negz.jpg" ];
+
+	console.log(urlPrefix + "posx.jpg");		
 	var textureCube	= THREE.ImageUtils.loadTextureCube( urls );
 	
 	var shader = THREE.ShaderLib['cube'];
@@ -36,7 +38,7 @@ var urlPrefix	= "images/";
 		uniforms	: shader.uniforms
 	});
 
-	skyboxMesh	= new THREE.Mesh( new THREE.CubeGeometry( 100000, 100000, 100000, 1, 1, 1, null, true ), material );
+	skyboxMesh	= new THREE.Mesh( new THREE.BoxGeometry( 100000, 100000, 100000, 1, 1, 1, null, true ), material );
 
 	scene.add( skyboxMesh );
 
